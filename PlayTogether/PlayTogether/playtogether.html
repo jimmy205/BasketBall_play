@@ -1,0 +1,22 @@
+<?php
+    
+    $user = 'root';
+    $password = 'root';
+    $db = 'gym';
+    $host = 'localhost';
+    $port = 3306;
+    
+    $mysqli = new mysqli($host,$user,$password,$db);
+    $mysqli -> query("SET NAMES URF-8");
+    
+    $account = $_POST['GymId']; $passwd = $_POST['PlayTime'];
+    $sql = "insert into play (GymId,PlayTime) VALUES (?,?)";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param('ss',$account,$passwd);
+    
+    if ($stmt->execute()){
+        echo "OK";
+    }else{
+        echo "XX";
+    }
+?>

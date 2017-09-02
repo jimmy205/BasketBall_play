@@ -1,0 +1,29 @@
+<?php
+    
+    $user = 'root';
+    $password = 'root';
+    $db = 'gym';
+    $host = 'localhost';
+    $port = 3306;
+    
+    $mysqli = new mysqli($host,$user,$password,$db);
+    $sql = "select * from play";
+    $stmt = $mysqli->query($sql);
+    $linea=$stmt->fetch_object();
+    
+    class play_array{
+        public $id;
+        public $playtime;
+    }
+
+while ($linea=$stmt->fetch_array()){
+    
+    $play_array = new stdClass;
+    $play_array -> id = $linea['Id'];
+    $play_array -> playtime = $linea['PlayTime'];
+    $allrow[] = $play_array;
+    //        echo "<td>{$linea->PlayTime}</td>";
+}
+
+echo json_encode($allrow);
+    ?>
